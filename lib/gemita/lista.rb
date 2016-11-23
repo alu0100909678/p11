@@ -5,7 +5,18 @@ Nodo = Struct.new(:value, :next, :prev){
 class Lista
   attr_reader  :head, :tail, :size
 
+   include Enumerable
   
+  def each
+    i = tail
+    f = @size
+    k = 0
+    while k < f
+    yield i.value
+    i = i.next
+    k = k+1
+    end
+  end
   def initialize()
     @head = nil
     @tail = nil
