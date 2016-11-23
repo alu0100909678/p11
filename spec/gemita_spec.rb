@@ -11,7 +11,7 @@ context Lista do
      i=['Macarrones con salsa tomate y queso', 'Escalope de ternera, 1 bistec mediano', 'Espaguetis y Hamburguesa encebollada']
      p=['V.C.T | % 313,6 kcal |',' 19% ', ' 34% ', ' 47% ']
      g="Hidratos y Carnes"
-    age = [12,]
+    age = [12]
      @almuerzo = Menu.new(t,i,p)
      @group = Grupo.new(t,i,p,g)
      @age = Edad.new(t,i,p,age)
@@ -19,6 +19,9 @@ context Lista do
      @n_menu = Nodo.new(@group,nil)
      #@n2_group  = Nodo.new(@group,@n_edad,nil)
      @n2_age = Nodo.new(@age,@n_menu,nil)
+     @list2 = Lista.new()
+     @num = 3
+     
  end
    describe "Probando clase lista" do
      it "Se crea la lista vacia" do
@@ -32,25 +35,38 @@ context Lista do
  end
    describe "Probando insertar nodo" do
      it "Se introduce un nodo" do
-       expect(@list.insertar(@group)).to eq(@n_menu)
-       expect(@list.extraer).to eq(@n_menu.value)
-       expect(@list.insertar(@age)).to eq(@n_edad)
-       expect(@list.extraer).to eq(@n_edad.value)
-
-       end
+        expect(@list.insertar(@group)).to eq(1)
+        expect(@list.extraer).to eq(@n_menu.value)
+     end
+        #expect(@list.insertar(@age)).to eq(@n_edad)
+       #expect(@list.extraer).to eq(@n_edad.value)
+   end
+   
+   describe "Probando enumerable" do
+       
+     it "Maximo" do
+       @list2.insertar(1)
+       @list2.insertar(2)
+       @list2.insertar(3)
+      expect(@list2.max).to eq(3)
+     end
+    
    end
 end
+
 context Menu do
   before :each do
     t=['ALMUERZO' , '(30-35%)']
     i=['Macarrones con salsa tomate y queso', 'Arroz tres delicias', 'Espaguetis, media racion con atun']
     p=['V.C.T | % 313,6 kcal |',' 19% ', ' 34% ', ' 47% ']
     g= 'Hidratos'
+    @menu = Menu.new(t,i,p)
     @grp = Grupo.new(t,i,p,g)
     j=['Cena' , '(35-40%)']
     k=['Ensalada mixta', 'Berengena rellena', 'Puchero']
     l=['V.C.T | % 212,6 kcal |',' 10% ', ' 25% ', ' 50% ']
     m= 'Verduras'
+    @menu2 = Menu.new(j,k,l)
     @grp2 = Grupo.new(j,k,l,m)
 
     r=['ALMUERZO' , '(30-35%)']
@@ -81,4 +97,13 @@ context Menu do
         expect(@grp.is_a?Object).to eq(true)
     end
   end
+  
+  describe "Comparable"do
+    it "Igualdad entre menús" do
+      expect(@menu < (@menu2)).to eq(false)
+      expect(@menu == (@menu2)).to eq(false)
+    end
+    
+  end
+  
 end

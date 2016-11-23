@@ -3,11 +3,13 @@ Nodo = Struct.new(:value, :next, :prev){
 }
 
 class Lista
-  attr_reader  :head, :tail
+  attr_reader  :head, :tail, :size
 
+  
   def initialize()
     @head = nil
     @tail = nil
+    @size = 0
   end
   def to_s
     out = "#{@head}"
@@ -15,25 +17,30 @@ class Lista
   end
   def insertar(a)
     @nodo = Nodo.new(a,@head)
+    
     if (@head != nil) then
       @head.next = @nodo
       @nodo.prev = @head
       @head = @nodo
+      @size = @size + 1
     else
       #puts "hola"
-      @nodo.next = nil
-      @nodo.prev = nil
       @head = @nodo
       @tail = @head
+      @size = @size + 1
+      
     end
   end
+  
   def extraer
+    if (head != nil)
     out = @head.value
     @head = @head.prev
-    if (out != nil)
-      out
-    else
+    @size = @size - 1
+  else 
+    out = nil
       puts "Lista vacia"
     end
+    out
   end
 end
