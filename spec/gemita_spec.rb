@@ -50,7 +50,18 @@ context Lista do
        @list2.insertar(3)
       expect(@list2.max).to eq(3)
      end
-    
+             it "Minimo"do
+       @list2.insertar(1)
+       @list2.insertar(2)
+       @list2.insertar(3)
+       expect(@list2.min).to eq(1)
+     end
+     it "Ordenar"do
+       @list2.insertar(1)
+       @list2.insertar(2)
+       @list2.insertar(3)
+       expect(@list2.sort).to eq([1,2,3])
+     end    
    end
 end
 
@@ -103,7 +114,5 @@ context Menu do
       expect(@menu < (@menu2)).to eq(false)
       expect(@menu == (@menu2)).to eq(false)
     end
-    
   end
-  
 end
