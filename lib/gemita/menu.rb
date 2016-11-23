@@ -4,7 +4,11 @@ class Menu
 
   include Comparable
   
- 
+ def <=>(other) 
+      
+    @calorias <=> other.calorias
+      
+  end
   
        #METODO INITIALIZE.
   def initialize(ti, me, calo)
