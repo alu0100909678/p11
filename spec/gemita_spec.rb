@@ -113,6 +113,78 @@ context Menu do
     it "Igualdad entre menús" do
       expect(@menu < (@menu2)).to eq(false)
       expect(@menu == (@menu2)).to eq(false)
+      expect(@menu > (@menu2)).to eq(true)
+    end
+  end
+  
+   context Menu_DSL do
+        before :each do    
+      @desayuno = Menu_DSL.new("Ejemplo 1") do
+      
+      titulo "Desayuno"
+      ingesta :min => 30
+      plato :descripcion => "Leche desnatada", :porcion => "1 vaso", :gramos => 200
+      plato :descripcion => "Cacao instantáneo", :porcion => "1 c/sopera", :gramos => 10
+      plato :descripcion => "Cereales de desayuno en hojuelas", :porcion => " 1 bol pequeño", :gramos => 40
+      plato :descripcion => "Almendras laminadas (10 unidades)", :porcion => "2 c/soperas", :gramos => 10
+      plato :descripcion => "Pan de trigo integral", :porcion => "1 rodaja", :gramos => 20
+      porcentajes :vct =>288.0, :proteinas => 17, :grasas => 21, :hidratos => 62
+      end
+  
+      @almuerzo = Menu_DSL.new("Ejemplo 2") do
+      
+      titulo "Almuerzo"
+      ingesta :min => 30, :max => 35
+      plato :descripcion => "Macarrones con salsa de tomate y queso parmesano", :porcion => "1 1/2 cucharón", :gramos => 200
+      plato :descripcion => "Escalope de ternera", :porcion => "1 bistec mediano", :gramos => 100
+      plato :descripcion => "Ensalada básica con zanahoria rallada", :porcion => "guarnición", :gramos => 120
+      plato :descripcion => "Mandarina", :porcion => "1 grande", :gramos => 180
+      plato :descripcion => "Pan de trigo integral", :porcion => "1 rodaja", :gramos => 20
+      porcentajes :vct => 785.9, :proteinas => 19, :grasas => 34, :hidratos => 47
+      end
+    
+    @cena = Menu_DSL.new("Ejemplo 3") do
+      
+      titulo "Cena"
+      ingesta :min => 25, :max => 30
+      plato :descripcion => "Crema de bubango", :porcion => "2 cucharones", :gramos => 200
+      plato :descripcion => "Tortilla campesina con espinacas", :porcion => "1 cuña grande", :gramos => 150
+      plato :descripcion => "Tomate en dados con atún", :porcion => "5 a 6 c/soperas", :gramos => 150
+      plato :descripcion => "Piña natural o en su jugo picada", :porcion => "5 c/soperas", :gramos => 120
+      plato :descripcion => "Pan de trigo integral", :porcion => "1 rodaja", :gramos => 20
+      porcentajes :vct => 561.6, :proteinas => 19, :grasas => 40, :hidratos => 41
+      end
+      
+      @lunes = Lista.new()
+      @nodo_l = Nodo.new(@desayuno,nil,nil)
+      @lunes.insertar(@nodo_l)
+      #expect(@list.insertar(@group)).to eq(1)
+    end
+    
+      it "se crea desayuno" do
+       expect(@desayuno).not_to be_nil
+    end
+  
+    it "se crea almuerzo" do
+       expect(@almuerzo).not_to be_nil
+    end
+  
+    it "se crea la cena" do
+      expect(@cena).not_to be_nil
+    end    
+    
+     it "se muestra desayuno" do
+        expect(@desayuno.to_s).to eq("Ejemplo 1\n=========\n[\"Desayuno\"] [[\" (30)%\"]]\n1) [\" (Leche desnatada, 1 vaso, 200)\"]\n2) [\" (Cacao instantáneo, 1 c/sopera, 10)\"]\n3) [\" (Cereales de desayuno en hojuelas,  1 bol pequeño, 40)\"]\n4) [\" (Almendras laminadas (10 unidades), 2 c/soperas, 10)\"]\n5) [\" (Pan de trigo integral, 1 rodaja, 20)\"]\n[[\" (VCT: 288.0kcal, Proteinas: 17%, Grasas: 21%, Hidratos: 62%)\"]]\n\n") 
+    end
+    
+    it "se muestra almuerzo" do
+        expect(@almuerzo.to_s).to eq("Ejemplo 2\n=========\n[\"Almuerzo\"] [[\" (30%, 35%)\"]]\n1) [\" (Macarrones con salsa de tomate y queso parmesano, 1 1/2 cucharón, 200)\"]\n2) [\" (Escalope de ternera, 1 bistec mediano, 100)\"]\n3) [\" (Ensalada básica con zanahoria rallada, guarnición, 120)\"]\n4) [\" (Mandarina, 1 grande, 180)\"]\n5) [\" (Pan de trigo integral, 1 rodaja, 20)\"]\n[[\" (VCT: 785.9kcal, Proteinas: 19%, Grasas: 34%, Hidratos: 47%)\"]]\n\n")
+    end
+    
+     it "se muestra cena" do
+        expect(@cena.to_s).to eq("Ejemplo 3\n=========\n[\"Cena\"] [[\" (25%, 30%)\"]]\n1) [\" (Crema de bubango, 2 cucharones, 200)\"]\n2) [\" (Tortilla campesina con espinacas, 1 cuña grande, 150)\"]\n3) [\" (Tomate en dados con atún, 5 a 6 c/soperas, 150)\"]\n4) [\" (Piña natural o en su jugo picada, 5 c/soperas, 120)\"]\n5) [\" (Pan de trigo integral, 1 rodaja, 20)\"]\n[[\" (VCT: 561.6kcal, Proteinas: 19%, Grasas: 40%, Hidratos: 41%)\"]]\n\n")  
     end
   end
 end
+
+

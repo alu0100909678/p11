@@ -17,6 +17,7 @@ class Lista
     k = k+1
     end
   end
+  
   def initialize()
     @head = nil
     @tail = nil
